@@ -10,7 +10,7 @@ services:
       # This key must be provided
       - ./id_rsa_proxy:/mole/.ssh/id_rsa
     environment:
-      - MOLE_LOCAL=0.0.0.0:8080
-      - MOLE_REMOTE=web:8080
+      - MOLE_LOCAL_1=0.0.0.0:8080
+      - MOLE_REMOTE_1=web:8080
         # IP address is the local address of the server. This is to show that it's connecting outside the bridge network
       - MOLE_SERVER=mole@10.255.52.39:2222
