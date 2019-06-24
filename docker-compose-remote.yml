@@ -1,0 +1,20 @@
+version: '2.2'
+
+services:
+  proxy:
+    image: panubo/sshd
+    ports:
+      - "2222:22"
+    volumes:
+      # This key must be provided
+      - ./id_rsa_proxy.pub:/etc/authorized_keys/mole
+    environment:
+      - SSH_USERS=mole:101:101
+
+  web:
+    image: stefanscherer/whoami
+    expose:
+      - 8080
+    ports:
+      # This port is published to debug that the web server is actually running
+      - "8080:8080"

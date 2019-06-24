@@ -1,0 +1,16 @@
+version: '2.2'
+
+services:
+  mole:
+    build: mole
+    ports:
+      # This is the port you will use to view the service: http://localhost:8880
+      - 8880:8080
+    volumes:
+      # This key must be provided
+      - ./id_rsa_proxy:/mole/.ssh/id_rsa
+    environment:
+      - MOLE_LOCAL=0.0.0.0:8080
+      - MOLE_REMOTE=web:8080
+        # IP address is the local address of the server. This is to show that it's connecting outside the bridge network
+      - MOLE_SERVER=mole@10.255.52.39:2222
