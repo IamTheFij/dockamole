@@ -7,7 +7,8 @@ services:
       - "2222:22"
     volumes:
       # This key must be provided
-      - ./id_rsa_proxy.pub:/etc/authorized_keys/mole
+      # - ./id_rsa_proxy.pub:/etc/authorized_keys/mole
+      - ./authorized_keys:/etc/authorized_keys/mole
     environment:
       - SSH_USERS=mole:101:101
 
