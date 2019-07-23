@@ -60,4 +60,4 @@ To be safe you should take precautions from someone logging into your server dir
 
 This prevents getting a shell if my key is ever leaked.
 
-Additionally, if you are actually planning on doing this in production, do not use the `-insecure` flag in ./mole/start.sh`. Instead you should provide pre generated server keys and add those as known hosts for `mole`.
+Additionally, if you are actually planning on doing this in production, do not use the `-insecure` flag in `./mole/start.sh`. Instead you should provide pre generated server keys and add those as known hosts for `mole`.
