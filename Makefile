@@ -16,8 +16,8 @@ restart:
 
 .PHONY: down
 down:
-	docker-compose -f ./docker-compose-client.yml down
-	docker-compose -f ./docker-compose-server.yml down
+	docker-compose -f ./docker-compose-client.yml down -v
+	docker-compose -f ./docker-compose-server.yml down -v
 
 .PHONY: server
 server: keys
