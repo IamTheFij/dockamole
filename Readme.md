@@ -49,6 +49,7 @@ Dockamole is configured using environment variables:
     # Optional
     MAX_TUNNELS         number of tunnels allowed (default 10)
     SSH_KEY             path to ssh private key that should be used (default ~/.ssh/id_rsa)
+    GEN_KNOWN_HOSTS     determines if known hosts should be generated on first start (default 1)
 
 ## Use in production
 

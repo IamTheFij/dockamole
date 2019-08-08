@@ -1,2 +1,4 @@
 id_rsa_proxy
 id_rsa_proxy.pub
+keys/
+authorized_keys

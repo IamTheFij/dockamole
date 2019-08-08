@@ -1,38 +1,49 @@
 .PHONY: default
-default: remote client
+default: server client
 
 .PHONY: all
-all: remote client
+all: server client
 
 .PHONY: stop
 stop:
-	docker-compose -f ./docker-compose-remote.yml stop
+	docker-compose -f ./docker-compose-server.yml stop
 	docker-compose -f ./docker-compose-client.yml stop
 
 .PHONY: restart
 restart:
-	docker-compose -f ./docker-compose-remote.yml restart
+	docker-compose -f ./docker-compose-server.yml restart
 	docker-compose -f ./docker-compose-client.yml restart
 
 .PHONY: down
 down:
-	docker-compose -f ./docker-compose-remote.yml down
 	docker-compose -f ./docker-compose-client.yml down
+	docker-compose -f ./docker-compose-server.yml down
 
-.PHONY: remote
-remote:
-	docker-compose -f ./docker-compose-remote.yml build
-	docker-compose -f ./docker-compose-remote.yml up -d
+.PHONY: server
+server: keys
+	docker-compose -f ./docker-compose-server.yml build
+	docker-compose -f ./docker-compose-server.yml up -d
 
 .PHONY: client
 client:
 	docker-compose -f ./docker-compose-client.yml build
 	docker-compose -f ./docker-compose-client.yml up -d
 
-.PHONY: remote-logs
-remote-logs:
-	docker-compose -f ./docker-compose-remote.yml logs -f
+.PHONY: server-logs
+server-logs:
+	docker-compose -f ./docker-compose-server.yml logs -f
 
 .PHONY: client-logs
 client-logs:
 	docker-compose -f ./docker-compose-client.yml logs -f
+
+keys:
+	mkdir -p keys/etc/ssh
+	ssh-keygen -A -f keys/
+
+keys/etc/ssh/ssh_host_dsa_key: keys
+keys/etc/ssh/ssh_host_ecdsa_key: keys
+keys/etc/ssh/ssh_host_ed25519_key: keys
+keys/etc/ssh/ssh_host_rsa_key: keys
+
+keys/known_hosts: keys
