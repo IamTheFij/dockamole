@@ -1,10 +1,7 @@
 ARG REPO=library
-FROM multiarch/qemu-user-static AS qemu
-
-# Build image from alpine
 FROM ${REPO}/alpine
 
-COPY --from=qemu /usr/bin/qemu-* /usr/bin/
+COPY --from=multiarch/qemu-user-static /usr/bin/qemu-* /usr/bin/
 
 # Install SSH and set up basic config
 RUN apk add openssh-server augeas

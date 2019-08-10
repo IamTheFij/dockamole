@@ -1,3 +1,4 @@
+DOCKER_REPO := iamthefij
 DOCKER_TAG := dockamole
 MOLE_VERSION := 0.4.0
 
@@ -97,4 +98,34 @@ build-server-arm64v8:
 	docker build server --build-arg REPO=arm64v8 -t $(DOCKER_TAG)-server-arm64v8
 
 .PHONY: build-all
-build-all: build build-arm32v6 build-arm64v8
+build-all: build build-arm32v6 build-arm32v7 build-arm64v8
+
+.PHONY: tag-all
+tag-all: build-all
+	@echo Tag client images
+	docker tag dockamole-client $(DOCKER_REPO)/dockamole-client:latest
+	docker tag dockamole-client $(DOCKER_REPO)/dockamole-client:linux-amd64
+	docker tag dockamole-client-arm32v6 $(DOCKER_REPO)/dockamole-client:linux-arm32v6
+	docker tag dockamole-client-arm32v7 $(DOCKER_REPO)/dockamole-client:linux-arm32v7
+	docker tag dockamole-client-arm64v8 $(DOCKER_REPO)/dockamole-client:linux-arm64v8
+	@echo Tag server images
+	docker tag dockamole-server $(DOCKER_REPO)/dockamole-server:latest
+	docker tag dockamole-server $(DOCKER_REPO)/dockamole-server:linux-amd64
+	docker tag dockamole-server-arm32v6 $(DOCKER_REPO)/dockamole-server:linux-arm32v6
+	docker tag dockamole-server-arm32v7 $(DOCKER_REPO)/dockamole-server:linux-arm32v7
+	docker tag dockamole-server-arm64v8 $(DOCKER_REPO)/dockamole-server:linux-arm64v8
+
+.PHONY: push-all
+push-all: tag-all
+	@echo Push client images
+	docker push $(DOCKER_REPO)/dockamole-client:latest
+	docker push $(DOCKER_REPO)/dockamole-client:linux-amd64
+	docker push $(DOCKER_REPO)/dockamole-client:linux-arm32v6
+	docker push $(DOCKER_REPO)/dockamole-client:linux-arm32v7
+	docker push $(DOCKER_REPO)/dockamole-client:linux-arm64v8
+	@echo Push server images
+	docker push $(DOCKER_REPO)/dockamole-server:latest
+	docker push $(DOCKER_REPO)/dockamole-server:linux-amd64
+	docker push $(DOCKER_REPO)/dockamole-server:linux-arm32v6
+	docker push $(DOCKER_REPO)/dockamole-server:linux-arm32v7
+	docker push $(DOCKER_REPO)/dockamole-server:linux-arm64v8
