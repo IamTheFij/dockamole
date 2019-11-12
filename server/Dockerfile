@@ -1,10 +1,11 @@
 ARG REPO=library
-FROM ${REPO}/alpine
+FROM multiarch/qemu-user-static:4.1.0-1 as qemu-user-static
+FROM ${REPO}/alpine:3.9
 
-COPY --from=multiarch/qemu-user-static /usr/bin/qemu-* /usr/bin/
+COPY --from=qemu-user-static /usr/bin/qemu-* /usr/bin/
 
 # Install SSH and set up basic config
-RUN apk add openssh-server augeas
+RUN apk add --no-cache openssh-server=7.9_p1-r6 augeas=1.11.0-r0
 
 # Create sshd configs
 RUN mkdir /var/run/sshd
