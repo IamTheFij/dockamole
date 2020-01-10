@@ -31,7 +31,7 @@ def push_to_docker(ctx, context):
                 "name": "publish manifest",
                 "image": "plugins/manifest",
                 "settings": {
-                    "spec": "manifest-{}.tmpl".format(context),
+                    "spec": "{}/manifest.tmpl".format(context),
                     "auto_tag": True,
                     "ignore_missing": True,
                     "username": {
