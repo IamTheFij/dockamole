@@ -17,7 +17,7 @@ def push_to_docker(ctx, context):
         # Add tests dependency
         "depends_on": [],
         "trigger": {
-            "event": ["tag"],
+            "event": ["push", "tag"],
             "ref": [
                 "refs/heads/master",
                 "refs/tags/v*",
