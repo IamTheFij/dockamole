@@ -55,6 +55,7 @@ def push_docker_step(context, tag_suffix, arch="amd64", repo="library"):
         "settings": {
             "repo": "iamthefij/dockamole-{}".format(context),
             "context": context,
+            "dockerfile": "{}/Dockerfile".format(context),
             "auto_tag": True,
             "auto_tag_suffix": tag_suffix,
             "username": {
