@@ -50,7 +50,7 @@ def push_to_docker(ctx, context):
 # Build and push docker image
 def push_docker_step(context, tag_suffix, arch="amd64", repo="library"):
     return {
-        "name": "build",
+        "name": "push {} {}".format(context, tag_suffix),
         "image": "plugins/docker",
         "settings": {
             "repo": "iamthefij/dockamole-{}".format(context),
