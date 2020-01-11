@@ -2,11 +2,11 @@ ARG REPO=library
 # Build mole for all arch
 FROM golang:1.12-alpine AS builder
 
-ENV MOLE_VERSION=0.4.0
-
-RUN apk add --no-cache git=2.22.0-r0 curl=7.66.0-r0 tar=1.32-r0
+RUN apk add --no-cache git~=2.24 curl~=7.67 tar~=1.32
 
 RUN mkdir /app
+
+ENV MOLE_VERSION=0.4.0
 RUN curl -L "https://github.com/davrodpin/mole/archive/v${MOLE_VERSION}.tar.gz" | tar zx -C /app
 WORKDIR /app/mole-${MOLE_VERSION}
 

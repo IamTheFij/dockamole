@@ -5,7 +5,7 @@ FROM ${REPO}/alpine:3.9
 COPY --from=qemu-user-static /usr/bin/qemu-* /usr/bin/
 
 # Install SSH and set up basic config
-RUN apk add --no-cache openssh-server=7.9_p1-r6 augeas=1.11.0-r0
+RUN apk add --no-cache openssh-server~=7.9 augeas~=1.11
 
 # Create sshd configs
 RUN mkdir /var/run/sshd
